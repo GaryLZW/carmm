@@ -40,21 +40,15 @@ def check_interpolation(initial, final, n_max, interpolation="linear", verbose=T
     # Interpolate linearly the potisions of the middle images:
     neb.interpolate(interpolation, apply_constraint=True)
 
-    # TODO: Tidy up this horrible mix of if statements.
-    if save:
-        t = Trajectory('interpolation.traj', 'w')
 
-    flag = True
     for i in range(0, n_max):
         if verbose:
             print("Assessing image", str(i + 1) + '.')
-        updated_flag = search_abnormal_bonds(images[i], verbose)
-        if save:
-            t.write(images[i])
-        if (not updated_flag):
-            flag = updated_flag
+        flag = search_abnormal_bonds(images[i], verbose)
 
     if save:
+        t = Trajectory('interpolation.traj', 'w')
+        [t.write(images[i]) for i in range(n_max)]
         t.close()
 
     return flag
