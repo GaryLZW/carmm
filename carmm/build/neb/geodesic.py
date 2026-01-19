@@ -86,10 +86,10 @@ class GeodesicInterpolator:
         from ase.build.rotate import minimize_rotation_and_translation
         from ase.visualize import view
 
-        if self.path_len > 20:
+        if self.path_len > 10:
             path_probe_len = self.path_len
         else:
-            path_probe_len = 20
+            path_probe_len = 10
 
         for im_idx in range(path_probe_len-2):
             distances = [self.cart_rmsd(im2, im1) for im1, im2 in zip(self.images[1:], self.images)]
