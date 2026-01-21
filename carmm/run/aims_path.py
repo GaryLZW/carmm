@@ -60,7 +60,6 @@ def set_aims_command(hpc='hawk', basis_set='light', defaults=2010, nodes_per_ins
     fhi_aims_directory = {
         "hawk": "/apps/local/projects/scw1057/software/fhi-aims/",
         "hawk-amd": "/apps/local/projects/scw1057/software/fhi-aims/",
-        # It isn't very satisfying that this is tied to a version. To be resolved.
         "falcon": "/shared/home2/app_shared/SCWF00007/software/fhi-aims/release/" + fhi_aims_version + "/",
         "isambard": "/home/ca-alogsdail/fhi-aims-gnu/",
         "isambard3": "/projects/c5b/software/fhi-aims/release/" + fhi_aims_version + "/",
