@@ -42,7 +42,7 @@ def set_aims_command(hpc='hawk', basis_set='light', defaults=2010, nodes_per_ins
     preamble = {
         "hawk": "time srun",
         "hawk-amd": "time srun",
-        "falcon": "time mpirun",
+        "falcon": "time srun",
         "isambard": "time aprun",
         "isambard3": "time srun",
         "archer2": "srun --cpu-bind=cores --distribution=block:block --hint=nomultithread",
@@ -117,7 +117,7 @@ def _get_cpu_command(hpc, nodes_per_instance=None):
         "hawk": { "cpus_per_node": 40, "cpu_command": f"--nodes=$SLURM_NNODES --ntasks=$SLURM_NTASKS -d mpirun", },
         "hawk-amd": { "cpus_per_node": 64, "cpu_command": f"--nodes=$SLURM_NNODES --ntasks=$SLURM_NTASKS -d mpirun", },
         # Untested, taken from Hawk
-        "falcon": { "cpus_per_node": 192, "cpu_command": "-n $SLURM_NTASKS", },
+        "falcon": { "cpus_per_node": 192, "cpu_command": "", },
         "isambard": { "cpus_per_node": 64, "cpu_command": f"-n $NPROCS", },
         "isambard3": { "cpus_per_node": 144, "cpu_command": "", },
         "young": { "cpus_per_node": 64, "cpu_command": "", },
