@@ -19,7 +19,23 @@ def test_generate_displaced_structures():
 
     assert (os.path.exists(f'{example_path}/geometry_eq.in'))
     assert (os.path.exists(f'{example_path}/phonopy_disp.yaml'))
-    # moments, charges = get_charges_and_moments(det,crys)
-    # creating_files_and_directories(supercells, charges, moments)
+    moments, charges = get_charges_and_moments(det,crys)
+    creating_files_and_directories(supercells, charges, moments, path=example_path)
+    assert (os.path.exists(f'{example_path}/disp-001/geometry.in'))
+
+    # After creating the displaced geometries in seperate folders, you will have to run first-principles calculation
+    # in FHI-aims in each of the separate directory to generate a aims.out file in each disp-00n folder
+    # the post-process of phonon calculations using phonon_analysis.py script in analyse folder depends on the presence
+    # of aims.out file in each of these folders
+    #
+    # import os
+    # for disp in os.listdir(example_path):
+    #     if os.path.isdir(f'{example_path}/{disp}'):
+    #         atoms = read(f'{example_path}/{disp}/geometry.in')
+    #         from carmm.run.aims_calculator import get_aims_calculator
+    #         fhi_calc = get_aims_calculator(dimensions=2,...,)
+    #         calc = fhi_calc
+    #         atoms.set_calculator(calc)
+    #         print(f'{defor}, {atoms.get_potential_energy()}')
 
 test_generate_displaced_structures()
