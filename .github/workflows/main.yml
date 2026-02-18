@@ -54,6 +54,7 @@ jobs:
         python -m pip install --upgrade pytest
         python -m pip install --upgrade pytest-cov
         python -m pip install --upgrade pymatgen
+        python -m pip install --upgrade phonopy
         # Removing as presumably MACE will automatically install dependencies
         # python -m pip install torch torchvision torchaudio
         
