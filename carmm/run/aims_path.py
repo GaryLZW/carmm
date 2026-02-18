@@ -87,8 +87,8 @@ def set_aims_command(hpc='hawk', basis_set='light', defaults=2010, nodes_per_ins
     if nodes_per_instance:
         # Check validity of task-farming setup before proceeding.
         # Todo: Add Isambard/Young as needed
-        assert hpc in ["archer2", "hawk", "hawk-amd", "aws"], \
-            "Only ARCHER2, Hawk and AWS supported for task-farming at the moment."
+        assert hpc in ["archer2", "hawk", "hawk-amd", "aws", "falcon", "isambard3"], \
+            "Only ARCHER2, Hawk, AWS, Falcon, and Isambard3 supported for task-farming at the moment."
 
         if hpc == "aws":
             assert nodes_per_instance == 1, "FHI-aims does not run on more than one node on AWS at present."
