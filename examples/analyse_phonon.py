@@ -1,11 +1,19 @@
 #IMPORTS
 
 def test_phonon_analysis():
+    '''
+    After creating the displaced geometries in seperate folders, you will have to run first-principles calculation
+    in FHI-aims in each of the separate directory to generate a aims.out file in each disp-00n folder
+    The post-process of phonon calculations using phonon_analysis.py script in analyse folder depends on the presence
+    of aims.out file in each of these folders
+
+    '''
 
     from ase.build import bulk
-    from carmm.phonon.post_process import get_band_conf, get_thermal_conf, generate_phonon_data, phonon_data_to_csv
+    from carmm.analyse.phonon_analysis import get_band_conf, get_thermal_conf, generate_phonon_data, phonon_data_to_csv
     from ase.io import read
     import os
+
 
     example_path = 'data/phonon_workflow'
 

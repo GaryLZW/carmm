@@ -9,7 +9,7 @@
 def test_generate_displaced_structures():
     from ase.build import bulk
     import sys
-    from carmm.phonon.pre_process import make_displaced_supercells, get_charges_and_moments, creating_files_and_directories
+    from carmm.build.get_displaced_structures_phonon import make_displaced_supercells, get_charges_and_moments, creating_files_and_directories
     import os
     crys = bulk('Al', 'fcc', a=4.121, cubic=True)
 
