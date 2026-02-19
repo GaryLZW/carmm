@@ -795,7 +795,7 @@ def _calc_generator(params,
                                                              **params)
 
     fhi_calc.parameters['override_warning_libxc'] = 'True'
-
+    
     """Forces required for optimisation"""
     if not forces:
         fhi_calc.parameters = {k: v for k, v in fhi_calc.parameters.items() if k != 'compute_forces'}

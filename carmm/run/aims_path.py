@@ -131,6 +131,8 @@ def _get_cpu_command(hpc, nodes_per_instance=None):
         hpc_settings["hawk-amd"]["cpu_command_task_farming"] = f"--nodes={nodes_per_instance} --ntasks={int(hpc_settings['hawk-amd']['cpus_per_node'] * nodes_per_instance)} -d mpirun"
         hpc_settings["archer2"]["cpu_command_task_farming"] = f"--nodes={nodes_per_instance} --ntasks={int(hpc_settings['archer2']['cpus_per_node'] * nodes_per_instance)}"
         hpc_settings["aws"]["cpu_command_task_farming"] = f"--nodes={nodes_per_instance} --ntasks={int(hpc_settings['aws']['cpus_per_node'] * nodes_per_instance)}"
+        hpc_settings["falcon"]["cpu_command_task_farming"] = f"--nodes={nodes_per_instance} --ntasks={int(hpc_settings['falcon']['cpus_per_node'] * nodes_per_instance)}"
+        hpc_settings["isambard3"]["cpu_command_task_farming"] = f"--nodes={nodes_per_instance} --ntasks={int(hpc_settings['isambard3']['cpus_per_node'] * nodes_per_instance)}"
 
     # Check calculation effiency
     if hpc in ["hawk","hawk-amd"]:
