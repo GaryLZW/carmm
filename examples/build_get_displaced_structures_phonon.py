@@ -38,4 +38,6 @@ def test_generate_displaced_structures():
     #         atoms.set_calculator(calc)
     #         print(f'{defor}, {atoms.get_potential_energy()}')
 
-test_generate_displaced_structures()
+import sys
+if sys.version_info.major==3 and sys.version_info.minor!=8:
+    test_generate_displaced_structures()

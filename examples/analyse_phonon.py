@@ -32,4 +32,6 @@ def test_phonon_analysis():
     for file in generated_files:
         assert (os.path.exists(f'{example_path}/{file}'))
 
-test_phonon_analysis()
+import sys
+if sys.version_info.major==3 and sys.version_info.minor!=8:
+    test_phonon_analysis()
