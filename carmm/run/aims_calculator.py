@@ -148,8 +148,7 @@ def get_aims_and_sockets_calculator(dimensions,
     fhi_calc.parameters['use_pimd_wrapper']=[host, port]
     
     from carmm.utils.python_env_check import ase_env_check
-    from pathlib import Path
-    if ase_env_check('3.23.0') and fhi_calc.directory != Path("."):
+    if ase_env_check('3.23.0') and fhi_calc.directory not in [".", "./"]:
         # New way of building socket calculator in ASE
         # Enables launch client, so aims can write output files to a subdirectory
         # See ASE documentation at the example of Aims calculator "Communication with calculators over sockets"
