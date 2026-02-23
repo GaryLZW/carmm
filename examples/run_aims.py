@@ -53,8 +53,10 @@ def test_run_aims():
 
     for state in range(4):
         # fhi_calc = get_aims_calculator(state)
-        sockets_calc, fhi_calc = get_aims_and_sockets_calculator(dimensions=state, verbose=True)
-
+        if state != 3:
+            sockets_calc, fhi_calc = get_aims_and_sockets_calculator(dimensions=state, verbose=True)
+        else:
+            sockets_calc, fhi_calc = get_aims_and_sockets_calculator(dimensions=state, directory="childir", verbose=True)
         # These are unused - legacy? Remove if no issues.
         #default_params = {'relativistic': ('atomic_zora', 'scalar'),
         #                  'xc': 'pbe',
@@ -66,11 +68,15 @@ def test_run_aims():
         #    default_params['k_grid'] = True
 
         # Assertion test that the correct calculators and default arguments are being set
-        #if ase_env_check('3.22.0'):
-        #    assert (type(sockets_calc.launch_client.calc) == Aims)
-        #else:
-        #    assert (type(sockets_calc.calc) == Aims)
-        assert (type(sockets_calc.calc) == Aims)    
+        if ase_env_check('3.22.0'):
+            from pathlib import Path
+            if fhi_calc.directory != Path("."):
+                from ase.calculators.aims import AimsTemplate
+                assert (isinstance(sockets_calc.self, AimsTemplate))
+            else:
+                assert (type(sockets_calc.launch_client.calc) == Aims)
+        else:
+            assert (type(sockets_calc.calc) == Aims)
         
         params = getattr(fhi_calc, 'parameters')
         assert params['relativistic'] == ('atomic_zora', 'scalar')
