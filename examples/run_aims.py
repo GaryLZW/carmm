@@ -66,10 +66,10 @@ def test_run_aims():
         #    default_params['k_grid'] = True
 
         # Assertion test that the correct calculators and default arguments are being set
-        if ase_env_check('3.22.0'):
-            assert (type(sockets_calc.launch_client.calc) == Aims)
-        else:
+        if ase_env_check('3.23.0'):
             assert (type(sockets_calc.calc) == Aims)
+        else:
+            assert (type(sockets_calc.launch_client.calc) == Aims)
             
         params = getattr(fhi_calc, 'parameters')
         assert params['relativistic'] == ('atomic_zora', 'scalar')
