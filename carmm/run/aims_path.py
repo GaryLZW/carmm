@@ -82,6 +82,20 @@ def set_aims_command(hpc='hawk', basis_set='light', defaults=2010, nodes_per_ins
 
     """Set the relevant environment variables based on HPC"""
     os.environ["AIMS_SPECIES_DIR"] = fhi_aims_directory[hpc] + species
+    
+    if hpc == "falcon":
+        if "I_MPI_PMI_LIBRARY" in os.environ:
+            print("PMI library is set. Carry on.")
+        else:
+            os.environ["I_MPI_PMI_LIBRARY"] = "/usr/lib64/libpmi.so"
+            print("Set PMI library path to ", os.environ["I_MPI_PMI_LIBRARY"])
+
+
+        #Note: pointing manually to Slurm's PMI-1 or PMI-2 library is necessary for using srun with IPMI
+        #if you see an error like this in your aims.out:
+        #'MPI startup(): PMI server not found. Please set I_MPI_PMI_LIBRARY variable if it is not a singleton case.' 
+        #See details in Slurm Documentation https://slurm.schedmd.com/mpi_guide.html#intel_mpi.
+    
 
     # Define the executable command
     if nodes_per_instance:
@@ -89,13 +103,6 @@ def set_aims_command(hpc='hawk', basis_set='light', defaults=2010, nodes_per_ins
         # Todo: Add Isambard/Young as needed
         assert hpc in ["archer2", "hawk", "hawk-amd", "aws", "falcon", "isambard3"], \
             "Only ARCHER2, Hawk, AWS, Falcon, and Isambard3 supported for task-farming at the moment."
-        if hpc == "falcon":
-            print("""
-            Note: pointing manually to Slurm's PMI-1 or PMI-2 library is necessary for using srun with IPMI
-            Add a line like this 'export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so' to your submission script 
-            if you see an error like this in your aims.out:
-            'MPI startup(): PMI server not found. Please set I_MPI_PMI_LIBRARY variable if it is not a singleton case.' 
-            See details in Slurm Documentation https://slurm.schedmd.com/mpi_guide.html#intel_mpi.""")
         if hpc == "aws":
             assert nodes_per_instance == 1, "FHI-aims does not run on more than one node on AWS at present."
 
