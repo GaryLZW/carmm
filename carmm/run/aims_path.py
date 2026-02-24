@@ -96,21 +96,6 @@ def set_aims_command(hpc='hawk', basis_set='light', defaults=2010, nodes_per_ins
         #'MPI startup(): PMI server not found. Please set I_MPI_PMI_LIBRARY variable if it is not a singleton case.' 
         #See details in Slurm Documentation https://slurm.schedmd.com/mpi_guide.html#intel_mpi.
     
-
-    if hpc == "falcon":
-        if "I_MPI_PMI_LIBRARY" in os.environ:
-            print("PMI library is set. Carry on.")
-        else:
-            os.environ["I_MPI_PMI_LIBRARY"] = "/usr/lib64/libpmi.so"
-            print("Set PMI library path to ", os.environ["I_MPI_PMI_LIBRARY"])
-
-
-        #Note: pointing manually to Slurm's PMI-1 or PMI-2 library is necessary for using srun with IPMI
-        #if you see an error like this in your aims.out:
-        #'MPI startup(): PMI server not found. Please set I_MPI_PMI_LIBRARY variable if it is not a singleton case.' 
-        #See details in Slurm Documentation https://slurm.schedmd.com/mpi_guide.html#intel_mpi.
-
-
     # Define the executable command
     if nodes_per_instance:
         # Check validity of task-farming setup before proceeding.
