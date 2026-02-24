@@ -71,9 +71,10 @@ def test_run_aims():
         # Assertion test that the correct calculators and default arguments are being set
         if ase_env_check('3.22.0'):
             from pathlib import Path
-            if fhi_calc.directory != Path("."):
+            if fhi_calc.directory != Path(".") and ase_env_check('3.23.0'):
                 from ase.calculators.aims import AimsTemplate
-                assert (isinstance(sockets_calc.self, AimsTemplate))
+                # Neither sockets_calc or sockets_calc.launch_client connects to Aims calculator directly with fhi_calc.socketio()
+                assert (sockets_calc.launch_client.__module__ == "ase.calculators.genericfileio")
             else:
                 assert (type(sockets_calc.launch_client.calc) == Aims)
         else:
