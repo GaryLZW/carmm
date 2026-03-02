@@ -14,7 +14,6 @@ def test_phonon_analysis():
     from ase.io import read
     import os
 
-
     example_path = 'data/phonon_workflow'
 
     atoms = read(f'{example_path}/geometry_eq.in')
