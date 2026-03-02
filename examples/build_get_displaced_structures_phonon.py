@@ -7,7 +7,7 @@ def test_generate_displaced_structures():
     import os
     crys = bulk('Al', 'fcc', a=4.121, cubic=True)
 
-    example_path = 'data/phonon_workflow'
+    example_path = f'{os.getcwd()}/data/phonon_workflow'
 
     det, supercells = make_displaced_supercells(crys, [1,1,1], 0.01, path=example_path)
 
