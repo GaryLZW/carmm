@@ -15,8 +15,8 @@ def test_generate_displaced_structures():
     assert (os.path.exists(f'{example_path}/phonopy_disp.yaml'))
     moments, charges = get_charges_and_moments(det,crys)
     creating_files_and_directories(supercells, charges, moments, path=example_path)
-    # import shutil
-    # shutil.copyfile(f'{example_path}/aims.out', f'{example_path}/disp-001/aims.out')
+    import shutil
+    shutil.copyfile(f'{example_path}/aims.out', f'{example_path}/disp-001/aims.out')
     assert (os.path.exists(f'{example_path}/disp-001/geometry.in'))
 
     # After creating the displaced geometries in seperate folders, you will have to run first-principles calculation

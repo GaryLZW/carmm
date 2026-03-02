@@ -1,0 +1,155 @@
+phonopy:
+  version: 2.48.0
+  frequency_unit_conversion_factor: 15.633302
+  symmetry_tolerance: 1.0e-05
+  calculator: aims
+  configuration:
+    create_displacements: '".true."'
+    dim: 1 1 1
+    calculator: '"aims"'
+space_group:
+  type: Fm-3m
+  number: 225
+  Hall_symbol: -F 4 2 3
+supercell_matrix:
+- - 1
+  - 0
+  - 0
+- - 0
+  - 1
+  - 0
+- - 0
+  - 0
+  - 1
+primitive_cell:
+  lattice:
+  - - 4.121
+    - 0.0
+    - 0.0
+  - - 0.0
+    - 4.121
+    - 0.0
+  - - 0.0
+    - 0.0
+    - 4.121
+  points:
+  - symbol: Al
+    coordinates:
+    - 0.0
+    - 0.0
+    - 0.0
+    mass: 26.981539
+  - symbol: Al
+    coordinates:
+    - 0.0
+    - 0.5
+    - 0.5
+    mass: 26.981539
+  - symbol: Al
+    coordinates:
+    - 0.5
+    - 0.0
+    - 0.5
+    mass: 26.981539
+  - symbol: Al
+    coordinates:
+    - 0.5
+    - 0.5
+    - 0.0
+    mass: 26.981539
+  reciprocal_lattice:
+  - - 0.242659548653239
+    - 0.0
+    - 0.0
+  - - 0.0
+    - 0.242659548653239
+    - 0.0
+  - - 0.0
+    - 0.0
+    - 0.242659548653239
+unit_cell:
+  lattice:
+  - - 4.121
+    - 0.0
+    - 0.0
+  - - 0.0
+    - 4.121
+    - 0.0
+  - - 0.0
+    - 0.0
+    - 4.121
+  points:
+  - symbol: Al
+    coordinates:
+    - 0.0
+    - 0.0
+    - 0.0
+    mass: 26.981539
+    reduced_to: 1
+  - symbol: Al
+    coordinates:
+    - 0.0
+    - 0.5
+    - 0.5
+    mass: 26.981539
+    reduced_to: 2
+  - symbol: Al
+    coordinates:
+    - 0.5
+    - 0.0
+    - 0.5
+    mass: 26.981539
+    reduced_to: 3
+  - symbol: Al
+    coordinates:
+    - 0.5
+    - 0.5
+    - 0.0
+    mass: 26.981539
+    reduced_to: 4
+supercell:
+  lattice:
+  - - 4.121
+    - 0.0
+    - 0.0
+  - - 0.0
+    - 4.121
+    - 0.0
+  - - 0.0
+    - 0.0
+    - 4.121
+  points:
+  - symbol: Al
+    coordinates:
+    - 0.0
+    - 0.0
+    - 0.0
+    mass: 26.981539
+    reduced_to: 1
+  - symbol: Al
+    coordinates:
+    - 0.0
+    - 0.5
+    - 0.5
+    mass: 26.981539
+    reduced_to: 2
+  - symbol: Al
+    coordinates:
+    - 0.5
+    - 0.0
+    - 0.5
+    mass: 26.981539
+    reduced_to: 3
+  - symbol: Al
+    coordinates:
+    - 0.5
+    - 0.5
+    - 0.0
+    mass: 26.981539
+    reduced_to: 4
+displacements:
+- atom: 1
+  displacement:
+  - 0.01
+  - 0.0
+  - 0.0

@@ -154,8 +154,6 @@ def generate_phonon_data(bandstructure=True, thermal_properties=True, path=None)
     path_final = os.path.join(parent_dir, path)
     os.chdir(path_final)
     os.system("phonopy -f disp-*/aims.out")
-    os.system("phonopy -p -s band.conf")
-    os.system("phonopy -p -s thermal.conf")
     if bandstructure:
         os.system("phonopy -p -s band.conf")
         if thermal_properties:
