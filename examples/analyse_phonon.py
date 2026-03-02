@@ -31,4 +31,6 @@ def test_phonon_analysis():
     for file in generated_files:
         assert (os.path.exists(f'{example_path}/{file}'))
 
+from build_get_displaced_structures_phonon import test_generate_displaced_structures
+test_generate_displaced_structures()
 test_phonon_analysis()

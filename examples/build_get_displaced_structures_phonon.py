@@ -35,5 +35,5 @@ def test_generate_displaced_structures():
     #         print(f'{defor}, {atoms.get_potential_energy()}')
 
 
-test_generate_displaced_structures()
+# test_generate_displaced_structures()
 
