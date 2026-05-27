@@ -33,20 +33,17 @@ def neighbours(atoms, centre, shell, cutoff=None, verbose=False):
     all_neighbours = set(centre)
     # List of lists storing each neighbour shell requested
     shell_list = [centre]
-    print(f"CUT OFF: {cutoff}")
+
     # Creates an empty list an appends atom indices whose distances are
     # x amount nearest neighbours away from centre
-
     for this_shell in range(shell):
         # keep new neighbor indices in a set to avoid duplicates
         new_neighbors = set()
         for index in all_neighbours:
             # find neighbors based on cutoff and connectivity matrix
             nl = NeighborList(cutoff, self_interaction=False, bothways=True)
-            print(f"NL: {nl}")
             nl.update(atoms)
             indices = nl.get_neighbors(index)[0]
-            print(f"INDICES: {indices}")
             for i in indices:
                 new_neighbors.add(i)
 
