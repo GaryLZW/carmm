@@ -218,7 +218,6 @@ class RotationBox():
                 rot_matrix = self.normal_rotation_matrix(theta, z_rot)
 
                 site_norm = np.dot(rot_matrix, site_norm.T).T
-                site_norm = site_norm / np.linalg.norm(site_norm)
 
         return site_norm
 
