@@ -18,6 +18,10 @@ def test_analyse_counterpoise():
     # This is an example script for using counterpoise_calc for counterpoise (CP) correction. Please note the species
     # files in data/CO_BSSE are fake ones and default species settings are also deleted from aims.out.
 
+    # Required for testing - disable these two lines in applied calculations
+    import os
+    os.environ['VERSION'] = "$VERSION"    
+
     set_aims_command(hpc='hawk', basis_set='light', defaults=2020)
     CO = read('data/CO_BSSE/C_monoxide_pbe.traj')
     examples_directory = getcwd()
@@ -38,6 +42,13 @@ def test_analyse_counterpoise():
     cp_index = counterpoise_calc(CO, a_id=[1], b_id=[0], fhi_calc=toy_calc, a_name='C', b_name='O',
                                  verbose=True, dry_run=True)
     cp_symbol = counterpoise_calc(CO, a_id=['C'], b_id=['O'], fhi_calc=toy_calc, dry_run=True)
+
+    # Test to make sure sc_accuracy_forces is not set, as FHI-aims can't calculate forces with empty sites
+    toy_calc.parameters['sc_accuracy_forces'] = 0.0001
+    try:
+        counterpoise_calc(CO, a_id=['C'], b_id=['O'], fhi_calc=toy_calc, dry_run=True, verbose=True)
+    except KeyError:
+        "FHI-aims cannot calculate forces with empty sites - disable and recalculate"
 
     # CP correction = A_only + B_only - A_plus_ghost - B_plus_ghost
     # This value should be added to the energy change of interest, such as adsorption energy.
