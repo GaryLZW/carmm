@@ -6,20 +6,21 @@ into a gif visualised in povray.
 
 import os
 
-def test_traj_to_gif():
-    from carmm.utils.traj_to_gif import traj_to_gif, gifmaker
+def test_atoms_to_gif():
+    from carmm.utils.traj_to_gif import atoms_to_gif, gifmaker
+    from ase.io import read
 
     # Usage example:
     # Call the overall function like this, the rest of the script just tests the functions individually
     # traj_to_gif('data/NH3-H3O_traj/nh3-h3o.traj', frames_per_second=10,
     #             pause_time=1, atom_subs=[['N', 'C'], ['O', 'N']], keep_temp_files=True)
 
-    file = 'data/NH3-H3O_traj/nh3-h3o.traj'
-    file, ext, steps, atoms, filenames = traj_to_gif(file, automatic=True, pause_time=None,
-                                                     atom_subs=[['N', 'C'], ['O', 'N']])
+    atoms = read('data/NH3-H3O_traj/nh3-h3o.traj@:')
+    filename = 'nh3-h3o'
+    file, steps, atoms, filenames = atoms_to_gif(atoms, filename, automatic=True, pause_time=None,
+                                                 atom_subs=[['N', 'C'], ['O', 'N']])
 
     assert file == 'nh3-h3o'
-    assert ext == 'traj'
     assert steps == 41
     assert len(atoms[17]) == 8  # Random frame
     assert atoms[11].symbols[4] == 'C'  # Random frame
