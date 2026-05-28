@@ -7,7 +7,7 @@ into a gif visualised in povray.
 import os
 
 def test_atoms_to_gif():
-    from carmm.utils.traj_to_gif import atoms_to_gif, gifmaker
+    from carmm.utils.atoms_to_video import atoms_to_gif, gifmaker
     from ase.io import read
 
     # Usage example:
