@@ -58,6 +58,6 @@ def test_atoms_to_gif():
     }
 
 
-test_traj_to_gif()
+test_atoms_to_gif()
 
 os.system('rm nh3-h3o.gif')
