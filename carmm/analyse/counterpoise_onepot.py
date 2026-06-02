@@ -89,6 +89,8 @@ def counterpoise_calc(complex_struc, a_id, b_id, fhi_calc=None, a_name=None, b_n
                                                                                 fhi_calc.template.outputname)
                 structures_cp[index].calc.atoms = structures_cp[index]
 
+            calculate_energy_ghost_compatible(calc=structures_cp[index].calc, atoms=structures_cp[index],
+                                              ghosts=ghosts_lists_cp[index], dry_run=dry_run)
             # Get the energy from the converged output.
             energy_i = total_energy(str(fhi_calc.directory) + "/" + species_list[index] + '.out')
             energies.append(energy_i)
@@ -195,22 +197,25 @@ def calculate_energy_ghost_compatible(calc, atoms=None, properties=['energy'],
         dry_run: flag for CI-test.
 
     """
-    from ase.calculators.calculator import Calculator
-    import subprocess, os
-    Calculator.calculate(calc, atoms, properties, system_changes)
-    # Write inputfiles. Scaled positions does not work with empty sites.
-    calc.write_input(calc.atoms, properties, system_changes, ghosts=ghosts, scaled=False)
-    command = calc.command
+    if not ase_env_check('3.23.0'):
+        from ase.calculators.calculator import Calculator
+        import subprocess, os
+        Calculator.calculate(calc, atoms, properties, system_changes)
+        # Write inputfiles. Scaled positions does not work with empty sites.
+        calc.write_input(calc.atoms, properties, system_changes, ghosts=ghosts, scaled=False)
+        command = calc.command
 
-    if dry_run:  # Only for CI tests
-        command = ''  # Used to be 'ls'
-    converged = False
-    if os.path.exists(calc.directory+'/'+calc.outfilename):
-        converged = calc.read_convergence()
-    if (not converged) or dry_run:
-        subprocess.check_call(command, shell=True, cwd=calc.directory)
+        if dry_run:  # Only for CI tests
+            command = ''  # Used to be 'ls'
+        converged = False
+        if os.path.exists(calc.directory+'/'+calc.outfilename):
+            converged = calc.read_convergence()
+        if (not converged) or dry_run:
+            subprocess.check_call(command, shell=True, cwd=calc.directory)
 
-    calc.read_results()
+        calc.read_results()
+    else:
+        calc.calculate(atoms, properties, system_changes)
 
 
 # Lazy work around
@@ -237,7 +242,7 @@ def is_metallic(lines):
 
 def total_energy(filename):
     """Parse the energy from the aims.out file"""
-    from txtfile_operations import reverse_search_for
+    from carmm.analyse.txtfile_operations import reverse_search_for
     with open(filename, "r") as file:
         lines = [line for line in file]
 
