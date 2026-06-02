@@ -235,7 +235,7 @@ def get_energy_dryrun(dir, outputname):
 def is_metallic(lines):
     """Checks the outputfile to see if the chunk corresponds
     to a metallic system"""
-    from txtfile_operations import reverse_search_for
+    from carmm.analyse.txtfile_operations import reverse_search_for
 
     line_start = reverse_search_for(["material is metallic within the approximate finite "
                                     "broadening function (occupation_type)"], lines)
