@@ -197,6 +197,7 @@ def calculate_energy_ghost_compatible(calc, atoms=None, properties=['energy'],
         dry_run: flag for CI-test.
 
     """
+    from carmm.utils.python_env_check import ase_env_check
     if not ase_env_check('3.23.0'):
         from ase.calculators.calculator import Calculator
         import subprocess, os
