@@ -1,3 +1,5 @@
+LINE_NOT_FOUND = object()
+
 def counterpoise_calc(complex_struc, a_id, b_id, fhi_calc=None, a_name=None, b_name=None,
                       verbose=False, dry_run=False):
     """
