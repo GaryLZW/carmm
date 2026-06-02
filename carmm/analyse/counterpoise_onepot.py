@@ -90,7 +90,7 @@ def counterpoise_calc(complex_struc, a_id, b_id, fhi_calc=None, a_name=None, b_n
                 structures_cp[index].calc.atoms = structures_cp[index]
 
             # Get the energy from the converged output.
-            energy_i = structures_cp[index].get_potential_energy()
+            energy_i = structures_cp[index].calc.results['energy']
             energies.append(energy_i)
 
     # Counterpoise correction for basis set superposition error. See docstring for the formula.
