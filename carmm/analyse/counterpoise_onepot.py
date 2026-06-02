@@ -90,7 +90,7 @@ def counterpoise_calc(complex_struc, a_id, b_id, fhi_calc=None, a_name=None, b_n
                 structures_cp[index].calc.atoms = structures_cp[index]
 
             # Get the energy from the converged output.
-            energy_i = structures_cp[index].calc.results['energy']
+            energy_i = total_energy(str(fhi_calc.directory) + "/" + species_list[index] + '.out')
             energies.append(energy_i)
 
     # Counterpoise correction for basis set superposition error. See docstring for the formula.
@@ -224,3 +224,30 @@ def get_energy_dryrun(dir, outputname):
             energy_line = line
 
     return float(energy_line.split()[5])
+
+
+def is_metallic(lines):
+    """Checks the outputfile to see if the chunk corresponds
+    to a metallic system"""
+    from txtfile_operations import reverse_search_for
+
+    line_start = reverse_search_for(["material is metallic within the approximate finite "
+                                    "broadening function (occupation_type)"], lines)
+    return line_start != LINE_NOT_FOUND
+
+def total_energy(filename):
+    """Parse the energy from the aims.out file"""
+    from txtfile_operations import reverse_search_for
+    with open(filename, "r") as file:
+        lines = [line for line in file]
+
+    if is_metallic(lines):
+        line_idx = reverse_search_for(["Total energy corrected"], lines)
+    else:
+        line_idx = reverse_search_for(["Total energy uncorrected"], lines)
+    
+    if line_idx == LINE_NOT_FOUND:
+        raise ValueError("No energy is associated with the structure.")
+
+    return float(lines[line_idx].split()[5])
+
