@@ -218,7 +218,9 @@ def calculate_energy_ghost_compatible(calc, atoms=None, properties=['energy'],
 
         calc.read_results()
     else:
-        calc.calculate(atoms, properties, system_changes)
+        # THIS WON'T WORK BECAUSE OF read_results.  calc.calculate(atoms, properties, system_changes)
+        calc.write_inputfiles(atoms, properties)
+        calc.template.execute(calc.directory, calc.profile)
 
 
 # Lazy work around
