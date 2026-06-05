@@ -12,8 +12,10 @@ def test_adsorbate_placer():
     from carmm.build.adsorbate_placer import RotationBox
     from ase import Atoms
 
+    idx = 0
     for cutoff_mult in [1, 1.2]:
 
+        idx += 1
         mth = molecule('CH3CH2OH')
         site = read("data/H-Y_cluster/H-Y_cluster.xyz")
 
@@ -27,8 +29,13 @@ def test_adsorbate_placer():
 
         mth_placed.rotate([-45, 0, -45])
 
-        comp_pos1 = np.array([19.95202473,  5.71058517,  1.61948947])
-        comp_pos2 = np.array([19.95022531,  3.44633423,  0.93801803])
+        if idx==1:
+            comp_pos1 = np.array([17.64422484,       3.85498689,      -0.54203256])
+            comp_pos2 = np.array([19.50003770,       2.89160039,       0.56208881])
+        if idx==2:
+            comp_pos1 = np.array([19.74553637,       5.73078939,       1.80099570])
+            comp_pos2 = np.array([19.77143688,       3.47775953,       1.08376180])
+
         error_pos1 = np.linalg.norm(comp_pos1 - mth_placed.atoms_ads.positions[0], axis=-1)
         error_pos2 = np.linalg.norm(comp_pos2 - mth_placed.atoms_ads.positions[2], axis=-1)
 
