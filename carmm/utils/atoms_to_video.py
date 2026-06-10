@@ -6,15 +6,17 @@ from PIL import Image
 from carmm.utils.povray_render import povray_render, atom_sub
 
 
-def traj_to_gif(filename, automatic=False, generic_projection_settings=None, povray_settings=None, frames_per_second=30,
+def atoms_to_gif(atoms, file, automatic=False, generic_projection_settings=None, povray_settings=None, frames_per_second=30,
                 pause_time=0.5, atom_subs=None, gif_options=None, keep_temp_files=True, **kwargs):
     """
     A function which takes a .traj file, visualises it in povray with your desired settings and outputs a .gif file.
 
     Parameters:
 
-    filename: String
-        Full name/directory of the .traj file to convert
+    atoms: List of Atoms objects
+        Read from the desired .traj file
+    file: String
+        Output file base name (i.e. don't include .gif)
     automatic: Boolean
         If True, automatically renders images using given settings
         If False, opens ASE GUI to allow the user to manually render the images (**FOLLOW THE GIVEN INSTRUCTIONS**)
@@ -45,18 +47,6 @@ def traj_to_gif(filename, automatic=False, generic_projection_settings=None, pov
     A .gif file of the .traj file, visualised in Povray with the desired settings
     """
 
-    # Retrieve the file name and file extension from (potentially) a full directory path
-    if filename is None:
-        filename = 'atoms.traj'
-    file = filename.split('/')[-1]
-    ext = file.split('.')[-1]
-    file = file.split('.')[:-1]
-    file = '.'.join(file)
-
-    if ext != 'traj':
-        raise RuntimeError('Function only supports .traj files')
-
-    atoms = read(filename + '@:')
     steps = len(atoms)
 
     # Generate the list of povray image filenames
@@ -92,7 +82,7 @@ def traj_to_gif(filename, automatic=False, generic_projection_settings=None, pov
     print("Happy cooking!")
 
     # For testing purposes
-    return file, ext, steps, atoms, filenames
+    return file, steps, atoms, filenames
 
 
 def gifmaker(file, filenames, frames_per_second, pause_time, gif_options, indices, keep_temp_files):
